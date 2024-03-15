@@ -6,8 +6,9 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.ImageView
 import androidx.core.view.GestureDetectorCompat
-import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.Animator
+import android.animation.Animator.*
 
 class ThrowBallActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
 
@@ -19,6 +20,11 @@ class ThrowBallActivity : AppCompatActivity(), GestureDetector.OnGestureListener
         setContentView(R.layout.activity_throw_ball)
 
         ballImage = findViewById(R.id.ball_image)
+
+        ballImage.setOnClickListener {
+            throwBall()
+        }
+
         gestureDetector = GestureDetectorCompat(this, this)
     }
 
@@ -28,8 +34,7 @@ class ThrowBallActivity : AppCompatActivity(), GestureDetector.OnGestureListener
     }
 
     override fun onDown(e: MotionEvent): Boolean {
-        // 必ず true を返すことで、他のジェスチャイベントが発生することを可能にします
-        return true
+        TODO("Not yet implemented")
     }
 
     override fun onShowPress(e: MotionEvent) {
@@ -64,15 +69,44 @@ class ThrowBallActivity : AppCompatActivity(), GestureDetector.OnGestureListener
     }
 
     private fun throwBall() {
-        val moveUp = ObjectAnimator.ofFloat(ballImage, "translationY", 0f, -1000f).apply {
+        val displayMetrics = resources.displayMetrics
+        val screenHeight = displayMetrics.heightPixels
+
+        // ボールのサイズとステータスバーの高さを考慮した移動距離
+        val translateYDistance = -screenHeight.toFloat() + ballImage.height
+
+
+        val moveUp = ObjectAnimator.ofFloat(ballImage, "translationY", 0f, translateYDistance).apply {
             duration = 1000 // ミリ秒単位でアニメーションの期間を設定
         }
         val fadeOut = ObjectAnimator.ofFloat(ballImage, "alpha", 1f, 0f).apply {
             duration = 1000 // ミリ秒単位でフェードアウトの期間を設定
         }
-        AnimatorSet().apply {
-            playTogether(moveUp, fadeOut) // アニメーションを同時に実行
-            start()
+        val resetPosition = ObjectAnimator.ofFloat(ballImage, "translationY", ballImage.translationY, 0f).apply {
+            duration = 0 // 位置をリセットするためのアニメーションなので、即時に戻す
         }
+        val resetAlpha = ObjectAnimator.ofFloat(ballImage, "alpha", ballImage.alpha, 1f).apply {
+            duration = 0 // アルファ値をリセットするためのアニメーションなので、即時に戻す
+        }
+
+        moveUp.addListener(object : AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+                fadeOut.start()
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+                resetPosition.start()
+                resetAlpha.start()
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+                TODO("Not yet implemented")
+            }
+        })
+        moveUp.start()
     }
 }
