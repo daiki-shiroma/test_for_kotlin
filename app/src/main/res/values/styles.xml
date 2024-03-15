@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ImportantButtonStyle" parent="Theme.AppCompat">
+        <item name="colorButtonNormal">@color/importantButtonNormal</item>
+        <item name="colorControlHighlight">@color/importantButtonHighLight</item>
+        <item name="android:textColor">@color/importantButtonTextColor</item>
+    </style>
+</resources>
