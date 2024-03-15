@@ -10,8 +10,8 @@ class MainActivity : AppCompatActivity() { // または ComponentActivity, 用�
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnThrowBall: Button = findViewById(R.id.btnThrowBall)
-        val btnFeed: Button = findViewById(R.id.btnFeed)
+        val btnThrowBall: Button = findViewById(R.id.button_throw_ball)
+        val btnFeed: Button = findViewById(R.id.button_feed)
 
         btnThrowBall.setOnClickListener {
             // 正しいクラス参照方法: ファイル拡張子は不要
