@@ -9,6 +9,7 @@ import androidx.core.view.GestureDetectorCompat
 import android.animation.ObjectAnimator
 import android.animation.Animator
 import android.animation.Animator.*
+import kotlin.math.abs
 
 class ThrowBallActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
 
@@ -21,9 +22,9 @@ class ThrowBallActivity : AppCompatActivity(), GestureDetector.OnGestureListener
 
         ballImage = findViewById(R.id.ball_image)
 
-        ballImage.setOnClickListener {
-            throwBall()
-        }
+//        ballImage.setOnClickListener {
+//            throwBall()
+//        }
 
         gestureDetector = GestureDetectorCompat(this, this)
     }
@@ -55,7 +56,7 @@ class ThrowBallActivity : AppCompatActivity(), GestureDetector.OnGestureListener
     }
 
     override fun onLongPress(e: MotionEvent) {
-        TODO("Not yet implemented")
+        throwBall()
     }
 
     override fun onFling(
@@ -64,8 +65,49 @@ class ThrowBallActivity : AppCompatActivity(), GestureDetector.OnGestureListener
         velocityX: Float,
         velocityY: Float
     ): Boolean {
-        this.throwBall()
+        var deltaX = e2.x
+        var deltaY = e2.y
+        if(e1 != null){
+            deltaX -= e1.x
+            deltaY -= e1.y
+        }
+
+
+        if (abs(deltaX) > abs(deltaY)) {
+            if (deltaX > 0) {
+                // 右へのスワイプ
+                onSwipeRight()
+            } else {
+                // 左へのスワイプ
+                onSwipeLeft()
+            }
+        } else {
+            if (deltaY > 0) {
+                // 下へのスワイプ
+                onSwipeDown()
+            } else {
+                // 上へのスワイプ
+                onSwipeUp()
+            }
+        }
         return true
+    }
+
+    private fun onSwipeRight() {
+        // 右スワイプ時の処理
+    }
+
+    private fun onSwipeLeft() {
+        // 左スワイプ時の処理
+    }
+
+    private fun onSwipeUp() {
+        // 上スワイプ時の処理
+        throwBall()
+    }
+
+    private fun onSwipeDown() {
+        // 下スワイプ時の処理
     }
 
     private fun throwBall() {

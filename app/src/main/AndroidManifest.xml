@@ -23,6 +23,7 @@
         </activity>
 
         <activity android:name=".ThrowBallActivity"></activity>
+        <activity android:name=".DirectionalSwipeActivity"></activity>
 
     </application>
 </manifest>

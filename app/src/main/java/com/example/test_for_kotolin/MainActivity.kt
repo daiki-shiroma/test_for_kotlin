@@ -12,8 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         val textView: TextView = findViewById(R.id.textView)
         textView.setOnClickListener {
-            // ThrowBallActivityを起動するIntentを作成
-            val intent = Intent(this, ThrowBallActivity::class.java)
+            val intent = Intent(this, DirectionalSwipeActivity::class.java)
             startActivity(intent)
         }
     }
