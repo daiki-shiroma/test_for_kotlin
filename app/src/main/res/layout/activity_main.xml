@@ -8,9 +8,15 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/directToThrowBall"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="ボールを投げる" />
+
+    <TextView
+        android:id="@+id/directToDragBall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="ボールを運ぶ" />
 
 </LinearLayout>

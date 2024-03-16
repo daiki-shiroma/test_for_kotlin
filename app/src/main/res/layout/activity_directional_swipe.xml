@@ -10,4 +10,12 @@
         android:src="@drawable/ball"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="160dp"
+        android:text="ホームに戻る" />
 </RelativeLayout>

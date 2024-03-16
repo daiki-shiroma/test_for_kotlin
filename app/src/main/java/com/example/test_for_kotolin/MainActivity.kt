@@ -10,9 +10,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView: TextView = findViewById(R.id.textView)
-        textView.setOnClickListener {
+        val directToDirectionalSwipeActivity: TextView = findViewById(R.id.directToThrowBall)
+        directToDirectionalSwipeActivity.setOnClickListener {
             val intent = Intent(this, DirectionalSwipeActivity::class.java)
+            startActivity(intent)
+        }
+
+        val directToDragBallActivity: TextView = findViewById(R.id.directToDragBall)
+        directToDragBallActivity.setOnClickListener {
+            val intent = Intent(this, DragBallActivity::class.java)
             startActivity(intent)
         }
     }

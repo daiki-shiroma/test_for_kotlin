@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ThrowBallActivity"></activity>
+        <activity android:name=".DragBallActivity"></activity>
         <activity android:name=".DirectionalSwipeActivity"></activity>
 
     </application>

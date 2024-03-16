@@ -5,33 +5,40 @@ import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class DirectionalSwipeActivity : AppCompatActivity(),View.OnTouchListener {
-    private var startX: Float = 0.0f
-    private var startY: Float = 0.0f
+    private var lastTouchX: Float = 0.0f
+    private var lastTouchY: Float = 0.0f
 
     private lateinit var ballImage: ImageView
+    private lateinit var backButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_throw_ball)
+        setContentView(R.layout.activity_directional_swipe)
 
         ballImage = findViewById(R.id.ball_image)
         ballImage.setOnTouchListener(this)
+
+        backButton = findViewById(R.id.back_button)
+        backButton.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
-                startX = event.x
-                startY = event.y
+                lastTouchX = event.x
+                lastTouchY = event.y
             }
             MotionEvent.ACTION_UP -> {
                 val endX = event.x
                 val endY = event.y
-                val distanceX = endX - startX
-                val distanceY = endY - startY
+                val distanceX = endX - lastTouchX
+                val distanceY = endY - lastTouchY
 
                 when {
                     distanceX > 100 -> onSwipeRight()
